@@ -3,55 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <title>신청 안내</title>
- <style>
-  body { 
-    font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; 
-    line-height: 1.7; 
-    padding: 15px; 
-    background: transparent; /* 바깥 배경은 투명 */
-  }
-  h2 { margin-top: 0; }
-  .divider { border-bottom: 2px solid #ddd; margin: 16px 0; }
-  a { 
-    color: #2b6cb0; 
-    text-decoration: none; 
-    word-break: break-all;   /* 긴 링크 줄바꿈 허용 */
-  }
-  a:hover { text-decoration: underline; }
-  #copyBtn { 
-    padding: 8px 14px; 
-    border: none; 
-    background: #4CAF50; 
-    color: white; 
-    border-radius: 4px; 
-    cursor: pointer; 
-  }
-  #copyBtn:hover { background: #45a049; }
+  <style>
+    body { 
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; 
+      line-height: 1.7; 
+      padding: 20px; 
+      background: transparent; /* 바깥 배경은 투명 */
+      text-align: center;       /* 버튼을 페이지 중앙에 */
+    }
+    h2 { margin-top: 0; }
+    .divider { border-bottom: 2px solid #ddd; margin: 16px 0; }
+    a { 
+      color: #2b6cb0; 
+      text-decoration: none; 
+      word-break: break-all;   /* 긴 링크 줄바꿈 허용 */
+    }
+    a:hover { text-decoration: underline; }
+    #copyBtn { 
+      padding: 8px 14px; 
+      border: none; 
+      background: #4CAF50; 
+      color: white; 
+      border-radius: 4px; 
+      cursor: pointer; 
+      margin-bottom: 20px; /* 카드랑 간격 */
+    }
+    #copyBtn:hover { background: #45a049; }
 
-  /* content 박스 스타일 */
-  #content {
-    background: #ffffff;       /* 흰색 배경 */
-    border-radius: 16px;       /* 둥근 모서리 */
-    padding: 15px;             /* 내부 여백 */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 살짝 그림자 */
-    max-width: 800px;          /* 최대 폭 제한 */
-    margin: 0 auto 20px auto;  /* 가운데 정렬 */
-  }
-
-  /* 버튼 가운데 정렬 */
-  .btn-container {
-    text-align: center;
-    margin-bottom: 16px;
-  }
-</style>
+    /* content 박스 스타일 */
+    #content {
+      background: #ffffff;       /* 흰색 배경 */
+      border-radius: 16px;       /* 둥근 모서리 */
+      padding: 24px;             /* 내부 여백 */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 살짝 그림자 */
+      max-width: 600px;          /* 최대 폭 제한 */
+      margin: 0 auto 20px auto;  /* 가운데 정렬 */
+      text-align: left;          /* 본문은 왼쪽 정렬 */
+    }
+  </style>
 </head>
 <body>
-  <div id="content">
-    <!-- 버튼을 맨 위로 올림 -->
-    <div class="btn-container">
-      <button id="copyBtn">📋 복사하기</button>
-    </div>
+  <!-- 버튼을 카드 바깥, 최상단에 배치 -->
+  <button id="copyBtn">📋 복사하기</button>
 
+  <div id="content">
     <p>안녕하세요! 냐베입니다. <br> 아래로 신청 안내 사항 전달드립니다. 좋은 하루 되시길 바랍니다(*^ω^)🍀🍀</p>
 
     <p><b>📌 신청 내용 안내</b></p>
@@ -91,7 +86,3 @@
   </script>
 </body>
 </html>
-
-
-
-
