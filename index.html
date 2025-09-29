@@ -4,14 +4,46 @@
   <meta charset="UTF-8">
   <title>신청 안내</title>
   <style>
-    body { font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; line-height: 1.7; padding: 20px; }
-    h2 { margin-top: 0; }
-    .divider { border-bottom: 2px solid #ddd; margin: 16px 0; }
-    a { color: #2b6cb0; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    #copyBtn { padding: 8px 14px; border: none; background: #4CAF50; color: white; border-radius: 4px; cursor: pointer; }
-    #copyBtn:hover { background: #45a049; }
-  </style>
+  body { 
+    font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; 
+    line-height: 1.7; 
+    padding: 20px; 
+    background: transparent; /* 바깥 배경은 투명 */
+  }
+  h2 { margin-top: 0; }
+  .divider { border-bottom: 2px solid #ddd; margin: 16px 0; }
+  a { 
+    color: #2b6cb0; 
+    text-decoration: none; 
+    word-break: break-all;   /* 긴 링크 줄바꿈 허용 */
+  }
+  a:hover { text-decoration: underline; }
+  #copyBtn { 
+    padding: 8px 14px; 
+    border: none; 
+    background: #4CAF50; 
+    color: white; 
+    border-radius: 4px; 
+    cursor: pointer; 
+  }
+  #copyBtn:hover { background: #45a049; }
+
+  /* content 박스 스타일 */
+  #content {
+    background: #ffffff;       /* 흰색 배경 */
+    border-radius: 16px;       /* 둥근 모서리 */
+    padding: 24px;             /* 내부 여백 */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 살짝 그림자 */
+    max-width: 600px;          /* 최대 폭 제한 */
+    margin: 0 auto 20px auto;  /* 가운데 정렬 */
+  }
+
+  /* 버튼 가운데 정렬 */
+  .btn-container {
+    text-align: center;
+    margin-top: 10px;
+  }
+</style>
 </head>
 <body>
   <div id="content">
@@ -35,40 +67,10 @@
     <p>궁금한 점이 있으시면 편하게 말씀주세요!</p>
   </div>
 
-  <style>
-  body { 
-    font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; 
-    line-height: 1.7; 
-    padding: 20px; 
-    background: #f0f0f0; /* 전체 배경은 살짝 회색 */
-  }
-  h2 { margin-top: 0; }
-  .divider { border-bottom: 2px solid #ddd; margin: 16px 0; }
-  a { color: #2b6cb0; text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  #copyBtn { 
-    padding: 8px 14px; 
-    border: none; 
-    background: #4CAF50; 
-    color: white; 
-    border-radius: 4px; 
-    cursor: pointer; 
-  }
-  #copyBtn:hover { background: #45a049; }
-
-  /* 여기서 content 영역을 카드처럼 */
-  #content {
-    background: #ffffff;       /* 흰색 배경 */
-    border-radius: 16px;       /* 모서리 둥글게 */
-    padding: 24px;             /* 내부 여백 */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 살짝 그림자 */
-    max-width: 600px;          /* 폭 제한 */
-    margin: 0 auto 20px auto;  /* 중앙 정렬 + 하단 여백 */
-  }
-</style>
-
-
-  <button id="copyBtn">📋 복사하기</button>
+  <!-- 버튼 가운데 정렬 컨테이너 -->
+  <div class="btn-container">
+    <button id="copyBtn">📋 복사하기</button>
+  </div>
 
   <script>
     document.getElementById("copyBtn").addEventListener("click", () => {
@@ -89,4 +91,6 @@
   </script>
 </body>
 </html>
+
+
 
