@@ -9,7 +9,7 @@
       line-height: 1.7;
       padding: 15px;
       background: transparent;
-      text-align: center;
+      text-align: left; /* ✅ 중앙정렬 → 왼쪽정렬 */
     }
     .divider { border-bottom: 2px solid #ddd; margin: 16px 0; }
     a { color: #2b6cb0; text-decoration: none; word-break: break-all; }
@@ -22,6 +22,9 @@
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto; /* 버튼만 중앙정렬 */
     }
     #copyBtn:hover { background: #45a049; }
     #content {
@@ -65,7 +68,7 @@
     document.getElementById("copyBtn").addEventListener("click", () => {
       const content = document.getElementById("content");
 
-      // 첫 줄 공백 제거된 HTML 생성
+      // ✅ 첫 줄 공백 제거된 HTML 생성
       const html = content.innerHTML.replace(/^\s+/, "");
       const tempEl = document.createElement("div");
       tempEl.innerHTML = html;
@@ -86,7 +89,6 @@
         alert("복사 오류: " + err);
       }
 
-      // 정리
       selection.removeAllRanges();
       tempEl.remove();
     });
