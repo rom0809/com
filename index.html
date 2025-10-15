@@ -4,95 +4,54 @@
   <meta charset="UTF-8">
   <title>신청 안내</title>
   <style>
-    body { 
-      font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; 
-      line-height: 1.7; 
-      padding: 15px; 
-      background: transparent; /* 바깥 배경은 투명 */
-      text-align: center;       /* 버튼을 페이지 중앙에 */
+    body {
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      line-height: 1.7;
+      padding: 15px;
+      background: transparent;
+      text-align: center;
     }
-    h2 { margin-top: 0; }
     .divider { border-bottom: 2px solid #ddd; margin: 16px 0; }
-    a { 
-      color: #2b6cb0; 
-      text-decoration: none; 
-      word-break: break-all;   /* 긴 링크 줄바꿈 허용 */
-    }
+    a { color: #2b6cb0; text-decoration: none; word-break: break-all; }
     a:hover { text-decoration: underline; }
-    #copyBtn { 
-      padding: 8px 14px; 
-      border: none; 
-      background: #4CAF50; 
-      color: white; 
-      border-radius: 4px; 
-      cursor: pointer; 
-      margin-bottom: 20px; /* 카드랑 간격 */
+    #copyBtn {
+      padding: 8px 14px;
+      border: none;
+      background: #4CAF50;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 20px;
     }
     #copyBtn:hover { background: #45a049; }
-
-    /* content 박스 스타일 */
     #content {
-      background: #ffffff;       /* 흰색 배경 */
-      border-radius: 16px;       /* 둥근 모서리 */
-      padding: 15px;             /* 내부 여백 */
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 살짝 그림자 */
-      max-width: 600px;          /* 최대 폭 제한 */
-      margin: 0 auto 20px auto;  /* 가운데 정렬 */
-      text-align: left;          /* 본문은 왼쪽 정렬 */
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 0 auto 20px auto;
+      text-align: left;
     }
   </style>
 </head>
 <body>
-  <!-- 버튼을 카드 바깥, 최상단에 배치 -->
   <button id="copyBtn">📋 복사하기</button>
 
   <div id="content">
-    <p>안녕하세요! 냐베입니다. <br> 아래로 신청 안내 사항 전달드립니다. 좋은 하루 되시길 바랍니다(*^ω^)🍀🍀</p>
+    <p>안녕하세요! 냐베입니다.<br>
+    아래로 신청 안내 사항 전달드립니다. 좋은 하루 되시길 바랍니다(*^ω^)🍀🍀</p>
 
     <p><b>📌 신청 내용 안내</b></p>
-
     <div class="divider"></div>
 
     <p><b>신청 타입 |</b></p>
     <p><b>총 금액 |</b> ,000원</p>
     <p><b>입금 계좌 |</b> KB국민은행 69960104263705 ㅅㅈㅎ</p>
 
-    <p>🔗 <b>일정 확인 시트 |</b>  
-    <a href="https://www.notion.so/1bb0d419218e8148850bf98ebac17004?source=copy_link" target="_blank">
+    <p>🔗 <b>일정 확인 시트 |</b><br>
+    <a href="https://www.notion.so/1bb0d419218e8148850bf98ebac17004" target="_blank">
       https://www.notion.so/1bb0d419218e8148850bf98ebac17004
     </a></p>
 
-    <p>※ 입금 확인 시 자동으로 일정 시트에 등록됩니다.<br>※ 입금 완료 후 별도 회신 없이 확인 처리됩니다. 입금이 누락된 경우에만 따로 연락드립니다!</p>
-
-    <p>궁금한 점이 있으시면 편하게 말씀주세요!</p>
-  </div>
-
-  <script>
-    document.getElementById("copyBtn").addEventListener("click", () => {
-      const range = document.createRange();
-      range.selectNode(document.getElementById("content"));
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-
-      try {
-         // 기본 복사 수행
-        document.execCommand("copy");
-
-        // 복사된 텍스트 가져와 앞줄 공백 제거
-        const cleanedText = selection.toString().trimStart();
-
-        // Clipboard API로 덮어쓰기
-        await navigator.clipboard.writeText(cleanedText);
-        alert("서식 포함 복사 완료! 🍀");
-      } catch (err) {
-        alert("복사에 실패했어요😭: " + err);
-      }
-      selection.removeAllRanges();
-    });
-  </script>
-</body>
-</html>
-
-
-
+    <p>※ 입금 확인 시 자동으로 일정 시트에 등록됩니다.<br>
