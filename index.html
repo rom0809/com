@@ -6,12 +6,12 @@
   <style>
     body {
       font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-      line-height: 1.7;
+      line-height: 1.6;
       padding: 15px;
       background: transparent;
       text-align: center;
     }
-    .divider { border-bottom: 2px solid #ddd; margin: 16px 0; }
+    .divider { border-bottom: 2px solid #ddd; margin: 10px 0; }
     a { color: #2b6cb0; text-decoration: none; word-break: break-all; }
     a:hover { text-decoration: underline; }
     #copyBtn {
@@ -32,6 +32,13 @@
       max-width: 600px;
       margin: 0 auto 20px auto;
       text-align: left;
+    }
+    /* ✅ Outlook 줄간 띄어쓰기 방지 핵심 */
+    #content p {
+      margin: 0;
+    }
+    #content p + p {
+      margin-top: 4px;
     }
   </style>
 </head>
@@ -64,20 +71,24 @@
   <script>
     document.getElementById("copyBtn").addEventListener("click", async () => {
       const content = document.getElementById("content");
-      const html = content.innerHTML.trimStart();
-      const text = content.innerText.trimStart();
 
-      // HTML과 텍스트 모두 클립보드에 저장
+      // Outlook 띄어쓰기 방지를 위해 <p> → <div> 치환 (HTML 복사용)
+      const cleanedHTML = content.innerHTML
+        .replace(/<p>/g, '<div>')
+        .replace(/<\/p>/g, '</div>')
+        .trimStart();
+
+      const plainText = content.innerText.trimStart();
+
       try {
         await navigator.clipboard.write([
           new ClipboardItem({
-            "text/html": new Blob([html], { type: "text/html" }),
-            "text/plain": new Blob([text], { type: "text/plain" }),
+            "text/html": new Blob([cleanedHTML], { type: "text/html" }),
+            "text/plain": new Blob([plainText], { type: "text/plain" }),
           }),
         ]);
         alert("서식 포함 복사 완료! 🍀");
       } catch (err) {
-        // navigator.clipboard 미지원 브라우저 대비 fallback
         const range = document.createRange();
         range.selectNode(content);
         const selection = window.getSelection();
