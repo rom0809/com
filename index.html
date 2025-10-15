@@ -62,33 +62,33 @@
   </div>
 
   <script>
-    document.getElementById("copyBtn").addEventListener("click", async () => {
+    document.getElementById("copyBtn").addEventListener("click", () => {
       const content = document.getElementById("content");
+
+      // 첫 줄 공백 제거된 HTML 생성
+      const html = content.innerHTML.replace(/^\s+/, "");
+      const tempEl = document.createElement("div");
+      tempEl.innerHTML = html;
+      document.body.appendChild(tempEl);
+
+      // 복사 범위 지정
       const range = document.createRange();
-      range.selectNode(content);
+      range.selectNodeContents(tempEl);
       const selection = window.getSelection();
       selection.removeAllRanges();
       selection.addRange(range);
 
       try {
-        // HTML 형식 복사
-        const htmlData = content.innerHTML.trimStart(); // 앞 공백만 제거
-        const textData = content.innerText.trimStart();
-
-        const clipboardData = new ClipboardItem({
-          "text/html": new Blob([htmlData], { type: "text/html" }),
-          "text/plain": new Blob([textData], { type: "text/plain" })
-        });
-
-        await navigator.clipboard.write([clipboardData]);
-        alert("서식 포함 복사 완료! 🍀");
+        const success = document.execCommand("copy");
+        if (success) alert("서식 포함 복사 완료! 🍀");
+        else alert("복사에 실패했어요 😭");
       } catch (err) {
-        // fallback (execCommand)
-        document.execCommand("copy");
-        alert("기본 복사로 처리되었습니다. 🍀");
+        alert("복사 오류: " + err);
       }
 
+      // 정리
       selection.removeAllRanges();
+      tempEl.remove();
     });
   </script>
 </body>
