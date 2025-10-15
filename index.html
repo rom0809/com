@@ -33,6 +33,8 @@
       margin: 0 auto 20px auto;
       text-align: left;
     }
+    /* 단락 기본 여백 최소화 (디스플레이용) */
+    #content p { margin: 0 0 8px 0; }
   </style>
 </head>
 <body>
@@ -54,7 +56,7 @@
       https://www.notion.so/1bb0d419218e8148850bf98ebac17004
     </a></p>
 
-    <p>※ 입금 확인 시 자동으로 일정 시트에 등록됩니다.<br>
+    <p>※ 입금 확인 후 일정이 자동으로 시트에 등록됩니다.<br>
     ※ 입금 완료 후 별도 회신 없이 확인 처리됩니다.<br>
     입금이 누락된 경우에만 따로 연락드립니다!</p>
 
@@ -62,31 +64,57 @@
   </div>
 
   <script>
-    document.getElementById("copyBtn").addEventListener("click", async () => {
-      const content = document.getElementById("content");
+    async function copyWithHtmlAndTrimFirstLine(element) {
+      // 1) 임시 컨테이너에 innerHTML 넣기
+      const tmp = document.createElement('div');
+      tmp.innerHTML = element.innerHTML;
 
-      // HTML & 텍스트 준비
-      const html = content.innerHTML.replace(/^\s+|\n+/g, "").trimStart();
-      const text = content.innerText.trimStart();
+      // 2) 선행 텍스트 노드(오직 공백/개행 문자로만 이루어진 노드)를 제거
+      while (tmp.firstChild && tmp.firstChild.nodeType === Node.TEXT_NODE && /^\s*$/.test(tmp.firstChild.nodeValue)) {
+        tmp.removeChild(tmp.firstChild);
+      }
 
+      // 3) 이제 정리된 HTML과 정리된 텍스트 준비
+      const cleanedHTML = tmp.innerHTML; // 선행 공백 텍스트 노드가 제거된 상태
+      const cleanedText = element.innerText.replace(/^\s+/, ''); // 텍스트 버전도 선행 공백 제거
+
+      // 4) Clipboard API로 HTML + Plain text 모두 쓰기 (대부분의 메일 클라이언트가 사용)
       try {
         await navigator.clipboard.write([
           new ClipboardItem({
-            "text/html": new Blob([html], { type: "text/html" }),
-            "text/plain": new Blob([text], { type: "text/plain" }),
-          }),
+            "text/html": new Blob([cleanedHTML], { type: "text/html" }),
+            "text/plain": new Blob([cleanedText], { type: "text/plain" })
+          })
         ]);
-        alert("서식 포함 복사 완료! 🍀");
+        return { ok: true };
       } catch (err) {
-        // Clipboard API 실패 시 execCommand fallback
+        return { ok: false, error: err };
+      }
+    }
+
+    document.getElementById("copyBtn").addEventListener("click", async () => {
+      const content = document.getElementById("content");
+
+      // 시도: Clipboard API로 HTML+text 쓰기 (선호)
+      const result = await copyWithHtmlAndTrimFirstLine(content);
+
+      if (result.ok) {
+        alert("서식 포함 복사 완료! (첫 줄 공백 제거됨) 🍀");
+        return;
+      }
+
+      // fallback: execCommand 복사(일부 환경에서만 동작)
+      try {
         const range = document.createRange();
         range.selectNode(content);
-        const selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
         document.execCommand("copy");
-        selection.removeAllRanges();
-        alert("기본 복사로 처리됐어요. 🍀 (일부 서식이 누락될 수 있습니다)");
+        sel.removeAllRanges();
+        alert("기본 복사로 처리됐어요. (일부 서식이 누락될 수 있습니다)");
+      } catch (err) {
+        alert("복사에 실패했어요😭: " + err);
       }
     });
   </script>
