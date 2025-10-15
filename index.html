@@ -55,3 +55,35 @@
     </a></p>
 
     <p>※ 입금 확인 시 자동으로 일정 시트에 등록됩니다.<br>
+    ※ 입금 완료 후 별도 회신 없이 확인 처리됩니다.<br>
+    입금이 누락된 경우에만 따로 연락드립니다!</p>
+
+    <p>궁금한 점이 있으시면 편하게 말씀주세요!</p>
+  </div>
+
+  <script>
+    document.getElementById("copyBtn").addEventListener("click", async () => {
+      const range = document.createRange();
+      range.selectNode(document.getElementById("content"));
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      try {
+        // 기본 복사 수행
+        document.execCommand("copy");
+
+        // 복사된 텍스트에서 앞줄 공백 제거
+        const cleanedText = selection.toString().trimStart();
+
+        // Clipboard API로 정리된 텍스트 덮어쓰기
+        await navigator.clipboard.writeText(cleanedText);
+
+        alert("서식 포함 복사 완료! 🍀");
+      } catch (err) {
+        alert("복사에 실패했어요😭: " + err);
+      }
+      selection.removeAllRanges();
+    });
+  </script>
+</body>
+</html>
